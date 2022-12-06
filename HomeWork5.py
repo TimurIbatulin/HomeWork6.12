@@ -67,7 +67,6 @@
 # s = s + r + ' = 0'
 # print(s)
 
-# 5. Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов (складываются числа, у которых "х" в одинаковых степенях).
 
 q = input('Введите первый многочлен - ')
 with open('f1.txt', 'w') as f_data:
@@ -76,70 +75,129 @@ q1 = input('Введите второй многочлен - ')
 with open('f2.txt', 'w') as f_data:
     f_data.write(q1)
 s = q.split('+')
+s1 = q1.split('+')
+t = len(s)
 print(s)
-ql = list(q)
-ql2 = list(q1)
-print(ql)
-l1 = len(ql)
-print(l1)
-l2 = len(ql2)
-d = str()
-p = str()
-qll = []
+print(s1)
+for x in range(len(s1)):
+    s.append(s1[x])
+print(s)
 x = 0
-while x < l1:
-    z = ql[x]
-    print(f'z = ', z)
-    while z.isdigit():
-        p = str(z)
-        d = str(d) + p
-        print(f'd = ', d)
-        x += 1
-        z = ql[x]
-        print(f'z2 = ', z)
-    qll.append(d)
-    d = str()
-    if z == '(':
-        tt = x + 6
-        while x < tt:
-            e = ql[x]
-            d = d + str(e)
-            x += 1
-        qll.append(d)
-        d = str()
-    if z == '*' or z == '+' or z == '-':
-        x += 1
-
-
-print(qll)
-
-
-
-
-
-
-# l1 = len(ql)          44*(x**2)+356*(x**3)
-# l2 = len(ql2)
-# for x in range(l1):
-#     for y in range(l2):
-#         if ql[x] == ql2[y]:
-#             x1 = x - 1
-#             y1 = y - 1
-#             x4 = x + 4
-#             y4 = y + 4
-#             x3 = x + 3
-#             y3 = y + 3
-#             if ql[x1] == ql2[y1] and ql[x4] == ql2[y4] and ql[x3] == ql[y3]:
-#                 if x > 3:
-#                     xd = x - 3
-#                     for p in range(xd, 0, -1):
-#                         if xd > 0:
-#                             xd1 = xd - 1
-#                             if ql[xd1] == ql[xd1].isdigit():
-#                                 mn = 
-
-
+x1 = t
+print(x1)
+y1 = x1
+plus = x1
+formula = str()
+count = 0
+while len(s) >= 1:
+    box = s[0].split('^')
+    step = box[1]
+    # print(step)
+    box = box[0]
+    liter = box[-1]
+    # print(f'liter = ', liter)
+    if len(box) == 1:
+            index = 1
+    elif len(box) > 1:
+            index = box[:-1]
+    index = box[:-1]
+    # print(f'index = ', index)
+    y = 1
+    count = 0
+   
+    while len(s) >= 2:
+        box1 = s[y].split('^')
+        step1 = box1[1]
+        # print(step1)
+        box1 = box1[0]
+        liter1 = box1[-1]
+        # print(f'liter1 = ', liter1)
+        if len(box1) == 1:
+            index1 = 1
+        elif len(box1) > 1:
+            index1 = box1[:-1]
+        # print(f'index1 = ', index1)
+        count = 0
+        
+        if liter == liter1 and step == step1:
+            sum = int(index) + int(index1)
+            formula = str(formula) + str(sum) + str(liter) + '^' + str(step)
+            # y = y1
+            if sum != 0 and x < plus:
+                formula = str(formula) + '+'
+            s.pop(y)
+            # s.pop(0)
+            count += 1
+            break
+        y += 1
+        if y == len(s):
+            break
+    
+    if count == 0:
+        formula = str(formula) + str(index) + str(liter) + '^' + str(step) # вписать добавления этой конструкции в формулу
+        if sum != 0 and y < plus:
+                formula = str(formula) + '+'
+    s.pop(0)
     
 
-# print(ql)
+print(formula)
 
+
+
+
+
+# 44x^2+356x^3+-453x^8+87x^5
+# 2x^2+6y^3+-5x^3+x^3
+# 4x^3+x^2+-13x^4
+
+
+
+# q = input('Введите первый многочлен - ')
+# with open('f1.txt', 'w') as f_data:
+#     f_data.write(q)
+# q1 = input('Введите второй многочлен - ')
+# with open('f2.txt', 'w') as f_data:
+#     f_data.write(q1)
+# s = q.split('+')
+# s1 = q1.split('+')
+# t = len(s)
+# print(s)
+# print(s1)
+# for x in range(len(s1)):
+#     s.append(s1[x])
+# print(s)
+# x = 0
+# x1 = t + 1
+# print(x1)
+# y1 = x1
+# plus = x1
+# formula = str()
+# while x < x1:
+#     box = s[x].split('^')
+#     step = box[1]
+#     # print(step)
+#     box = box[0]
+#     liter = box[-1]
+#     # print(f'liter = ', liter)
+#     index = box[:-1]
+#     # print(f'index = ', index)
+#     y = x +1
+#     while y < y1:
+#         box1 = s[x].split('^')
+#         step1 = box1[1]
+#         # print(step1)
+#         box1 = box1[0]
+#         liter1 = box1[-1]
+#         # print(f'liter1 = ', liter1)
+#         index1 = box1[:-1]
+#         # print(f'index1 = ', index1)
+#         if liter == liter1 and step == step1:
+#             sum = int(index) + int(index1)
+#             formula = str(formula) + str(sum) + str(liter) + '^' + str(step)
+#             y = y1
+#             if sum != 0 and x < plus:
+#                 formula = str(formula) + '+'
+#         y += 1
+#     x += 1
+
+# print(formula)
